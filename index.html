@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Max Chat - Социальная сеть</title>
+    <title>Collaps Chat - Социальная сеть</title>
     <style>
         :root {
             --bg-primary: #ffffff;
@@ -688,7 +688,7 @@
             <!-- Шапка -->
             <div class="header">
                 <div class="logo">
-                    <span>Max Chat</span>
+                    <span>Collaps Chat</span>
                     <button class="theme-toggle" id="themeToggle">
                         <span id="themeIcon">🌙</span>
                         <span id="themeText">Тёмная тема</span>
@@ -804,7 +804,7 @@
                     <!-- Экран входа -->
                     <div class="screen active" id="loginScreen">
                         <div class="form-container">
-                            <h2 style="text-align: center; margin-bottom: 30px; color: var(--text-primary);">Вход в Max Chat</h2>
+                            <h2 style="text-align: center; margin-bottom: 30px; color: var(--text-primary);">Вход в Collaps Chat</h2>
                             <div class="form-group">
                                 <label>Юзернейм или email</label>
                                 <input type="text" id="loginUsername" placeholder="Введите ваш юзернейм" autocomplete="off">
@@ -825,7 +825,7 @@
                     <!-- Экран регистрации -->
                     <div class="screen" id="registerScreen">
                         <div class="form-container">
-                            <h2 style="text-align: center; margin-bottom: 30px; color: var(--text-primary);">Регистрация в Max Chat</h2>
+                            <h2 style="text-align: center; margin-bottom: 30px; color: var(--text-primary);">Регистрация в Collaps Chat</h2>
                             <div class="form-group">
                                 <label>Юзернейм</label>
                                 <input type="text" id="regUsername" placeholder="Придумайте юзернейм" autocomplete="off">
@@ -1101,10 +1101,10 @@
             'zhopa', 'жopa',
             
             // Особо опасные комбинации
-            'еблан', 'ебанько', 'ебашка', // вот эта ошибка была!
+            'еблан', 'ебанько', 'ебашка',
             'ёблан', 'ёбанько',
             'eblan', 'eban\'ko', 'yeblan',
-            'идиот', 'дурак', 'дебил', 'кретин', // оскорбительные
+            'идиот', 'дурак', 'дебил', 'кретин',
             'idiot', 'durak', 'debil', 'cretin'
         ];
         
@@ -2032,7 +2032,7 @@
         const eventHandlers = {
             init: function() {
                 // Загружаем тему из localStorage
-                const savedTheme = localStorage.getItem('maxChatTheme');
+                const savedTheme = localStorage.getItem('collapsChatTheme');
                 if (savedTheme === 'dark') {
                     this.toggleTheme();
                 }
@@ -2041,13 +2041,13 @@
                 firebaseFunctions.loadBannedUsers();
                 
                 // Проверяем, есть ли сохраненный пользователь
-                const savedUser = localStorage.getItem('maxChatUser');
+                const savedUser = localStorage.getItem('collapsChatUser');
                 if (savedUser) {
                     try {
                         currentUser = JSON.parse(savedUser);
                         this.showMainApp();
                     } catch (e) {
-                        localStorage.removeItem('maxChatUser');
+                        localStorage.removeItem('collapsChatUser');
                     }
                 }
                 
@@ -2199,12 +2199,12 @@
                     html.removeAttribute('data-theme');
                     elements.themeIcon.textContent = '🌙';
                     elements.themeText.textContent = 'Тёмная тема';
-                    localStorage.setItem('maxChatTheme', 'light');
+                    localStorage.setItem('collapsChatTheme', 'light');
                 } else {
                     html.setAttribute('data-theme', 'dark');
                     elements.themeIcon.textContent = '☀️';
                     elements.themeText.textContent = 'Светлая тема';
-                    localStorage.setItem('maxChatTheme', 'dark');
+                    localStorage.setItem('collapsChatTheme', 'dark');
                 }
                 
                 if (elements.settingsScreen.classList.contains('active')) {
@@ -2231,7 +2231,7 @@
                 
                 if (result.success) {
                     currentUser = result.user;
-                    localStorage.setItem('maxChatUser', JSON.stringify(currentUser));
+                    localStorage.setItem('collapsChatUser', JSON.stringify(currentUser));
                     utils.showNotification('Вход выполнен успешно!');
                     this.showMainApp();
                 } else {
@@ -2283,7 +2283,7 @@
                 
                 if (result.success) {
                     currentUser = result.user;
-                    localStorage.setItem('maxChatUser', JSON.stringify(currentUser));
+                    localStorage.setItem('collapsChatUser', JSON.stringify(currentUser));
                     utils.showNotification('Регистрация успешна!');
                     this.showMainApp();
                 } else {
@@ -2301,7 +2301,7 @@
                 selectedUser = null;
                 selectedChannel = null;
                 selectedGroup = null;
-                localStorage.removeItem('maxChatUser');
+                localStorage.removeItem('collapsChatUser');
                 this.showScreen('login');
                 elements.sidebar.style.display = 'none';
                 elements.usernameDisplay.textContent = 'Гость';
@@ -2346,7 +2346,7 @@
                 
                 if (result.success) {
                     currentUser.username = newUsername;
-                    localStorage.setItem('maxChatUser', JSON.stringify(currentUser));
+                    localStorage.setItem('collapsChatUser', JSON.stringify(currentUser));
                     
                     // Обновляем отображение
                     this.updateUsernameDisplay();
@@ -2397,7 +2397,7 @@
                 
                 if (result.success) {
                     currentUser.searchUsername = newSearchUsername;
-                    localStorage.setItem('maxChatUser', JSON.stringify(currentUser));
+                    localStorage.setItem('collapsChatUser', JSON.stringify(currentUser));
                     utils.showNotification('Юзернейм для поиска успешно изменен!');
                 } else {
                     utils.showNotification(result.message, 'error');
@@ -3128,104 +3128,5 @@
             eventHandlers.init();
         });
     </script>
-
-<!-- Футер с пользовательским соглашением (остается без изменений) -->
-<div style="position: fixed; bottom: 0; left: 0; right: 0; background: var(--bg-secondary); border-top: 1px solid var(--border-color); padding: 10px 20px; text-align: center; z-index: 1000; display: none;" id="footer">
-    <div style="font-size: 12px; color: var(--text-secondary);">
-        Используя Max Chat, вы соглашаетесь с 
-        <a href="#" id="showTerms" style="color: #667eea; text-decoration: none;">Пользовательским соглашением</a> 
-        и 
-        <a href="#" id="showPrivacy" style="color: #667eea; text-decoration: none;">Политикой конфиденциальности</a>.
-        © 2026 Max Chat
-    </div>
-</div>
-
-<!-- Модальное окно с соглашением (остается без изменений) -->
-<div class="confirm-modal" id="termsModal">
-    <div class="confirm-content" style="max-width: 800px; max-height: 80vh; overflow-y: auto;">
-        <h3 style="margin-bottom: 20px;">ПОЛЬЗОВАТЕЛЬСКОЕ СОГЛАШЕНИЕ</h3>
-        <!-- ... содержимое без изменений ... -->
-        <div class="confirm-buttons" style="margin-top: 20px;">
-            <button class="btn btn-primary" id="acceptTerms">Принимаю</button>
-            <button class="btn btn-secondary" id="closeTerms">Закрыть</button>
-        </div>
-    </div>
-</div>
-
-<!-- Модальное окно с политикой конфиденциальности (остается без изменений) -->
-<div class="confirm-modal" id="privacyModal">
-    <div class="confirm-content" style="max-width: 800px; max-height: 80vh; overflow-y: auto;">
-        <h3 style="margin-bottom: 20px;">Политика конфиденциальности Max Chat</h3>
-        <!-- ... содержимое без изменений ... -->
-        <div class="confirm-buttons" style="margin-top: 20px;">
-            <button class="btn btn-secondary" id="closePrivacy">Закрыть</button>
-        </div>
-    </div>
-</div>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const footer = document.getElementById('footer');
-    const termsModal = document.getElementById('termsModal');
-    const privacyModal = document.getElementById('privacyModal');
-    const showTerms = document.getElementById('showTerms');
-    const showPrivacy = document.getElementById('showPrivacy');
-    const acceptTerms = document.getElementById('acceptTerms');
-    const closeTerms = document.getElementById('closeTerms');
-    const closePrivacy = document.getElementById('closePrivacy');
-    
-    // Показываем футер на экранах входа/регистрации
-    const loginScreen = document.getElementById('loginScreen');
-    const registerScreen = document.getElementById('registerScreen');
-    
-    if (loginScreen && loginScreen.classList.contains('active') || 
-        registerScreen && registerScreen.classList.contains('active')) {
-        footer.style.display = 'block';
-    }
-    
-    // Обработчики для модального окна пользовательского соглашения
-    showTerms?.addEventListener('click', function(e) {
-        e.preventDefault();
-        termsModal.style.display = 'flex';
-    });
-    
-    // Обработчики для модального окна политики конфиденциальности
-    showPrivacy?.addEventListener('click', function(e) {
-        e.preventDefault();
-        privacyModal.style.display = 'flex';
-    });
-    
-    acceptTerms?.addEventListener('click', function() {
-        termsModal.style.display = 'none';
-        localStorage.setItem('acceptedTerms', 'true');
-    });
-    
-    closeTerms?.addEventListener('click', function() {
-        termsModal.style.display = 'none';
-    });
-    
-    closePrivacy?.addEventListener('click', function() {
-        privacyModal.style.display = 'none';
-    });
-    
-    // Закрытие модальных окон при клике вне контента
-    window.addEventListener('click', function(event) {
-        if (event.target === termsModal) {
-            termsModal.style.display = 'none';
-        }
-        if (event.target === privacyModal) {
-            privacyModal.style.display = 'none';
-        }
-    });
-    
-    // Проверяем, принял ли пользователь соглашение
-    if (!localStorage.getItem('acceptedTerms') && 
-        (loginScreen?.classList.contains('active') || registerScreen?.classList.contains('active'))) {
-        setTimeout(() => {
-            termsModal.style.display = 'flex';
-        }, 1000);
-    }
-});
-</script>
 </body>
 </html>
